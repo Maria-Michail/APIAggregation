@@ -1,0 +1,6 @@
+@AgileActorsApp_HostAddress = http://localhost:5089
+
+GET {{AgileActorsApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
