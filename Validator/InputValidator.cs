@@ -44,7 +44,7 @@
             return category;
         }
 
-        public static DateTime ValidateDate(DateTime? date)
+        public static DateTime ValidateDate(DateTime date)
         {
             if (date == DateTime.MinValue) return DateTime.Today;
 
@@ -52,7 +52,7 @@
             {
                 throw new ValidationException($"Invalid date. Date must be between {MinDate:yyyy-MM-dd} and {MaxDate:yyyy-MM-dd}.");
             }
-            return date.Value;
+            return date;
         }
     }
 }

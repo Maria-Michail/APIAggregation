@@ -1,6 +1,5 @@
 using AgileActorsApp.ApiKey;
 using AgileActorsApp.Cache;
-using AgileActorsApp.Middleware;
 using AgileActorsApp.Services;
 using AgileActorsApp.Services.Movies;
 using AgileActorsApp.Services.News;
@@ -13,7 +12,7 @@ var configuration = builder.Configuration;
 builder.Services.Configure<ApiKeys>(configuration.GetSection("ApiKeys"));
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddScoped<MemoryCacheService>();
+builder.Services.AddScoped<IMemoryCacheService, MemoryCacheService>();
 
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<INewsService, NewsService>();
@@ -32,8 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseMiddleware<RequestTimingMiddleware>();
 
 app.UseHttpsRedirection();
 
