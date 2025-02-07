@@ -6,6 +6,6 @@ namespace AgileActorsApp.Models
     {
         public ArticlesResult Articles { get; set; }
         public WeatherResponse Weather { get; set; }
-        public System.Net.TMDb.Movies Movies { get; set; }
+        public MovieSearchResponse Movies { get; set; }
     }
 }

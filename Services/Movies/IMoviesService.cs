@@ -1,7 +1,9 @@
-﻿namespace AgileActorsApp.Services.Movies
+﻿using AgileActorsApp.Models;
+
+namespace AgileActorsApp.Services.Movies
 {
     public interface IMoviesService
     {
-        Task<System.Net.TMDb.Movies> GetTopRatedMovies(string language, CancellationToken cancellationToken);
+        Task<MovieSearchResponse> GetTopRatedMovies(string language, CancellationToken cancellationToken);
     }
 }

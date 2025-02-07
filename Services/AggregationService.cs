@@ -23,24 +23,26 @@ namespace AgileActorsApp.Services
 
         public async Task<AggregationResponse> GetAggregatedDataAsync(AggregationRequest request, CancellationToken cancellationToken)
         {
-            request.NewsCountry = InputValidator.ValidateCountry(request.NewsCountry);
+            request.Country = InputValidator.ValidateCountry(request.Country);
             request.NewsCategory = InputValidator.ValidateCategory(request.NewsCategory);
             request.Date = InputValidator.ValidateDate(request.Date);
 
-            var countryEnum = CountryMapping.GetCountryEnum(request.NewsCountry);
+            var countryEnum = CountryMapping.GetCountryEnum(request.Country);
             var categoryEnum = CategoryMapping.GetCategoryEnum(request.NewsCategory);
-            var coordinates = CountryCoordinatesMapping.GetCoordinates(request.NewsCountry);
-            var language = CountryLanguageMapping.GetLanguage(request.NewsCountry);
+            var coordinates = CountryCoordinatesMapping.GetCoordinates(request.Country);
+            var language = CountryLanguageMapping.GetLanguage(request.Country);
 
             var newsTask = _newsService.GetTopHeadlinesAsync(countryEnum, categoryEnum, request.NewsKeyword);
             var weatherTask = _weatherService.GetWeatherAsync(coordinates.Latitude, coordinates.Longitude, request.Date);
             var moviesTask = _moviesService.GetTopRatedMovies(language, cancellationToken);
 
-            await Task.WhenAll(newsTask, weatherTask);
+            await Task.WhenAll(newsTask, weatherTask, moviesTask);
 
-            var newsArticles = newsTask.Result ?? new ArticlesResult();
-            var weather = weatherTask.Result ?? new WeatherResponse();
-            var movies = moviesTask.Result ?? new System.Net.TMDb.Movies();
+            var newsArticles = newsTask.Result;
+            var weather = weatherTask.Result;
+            var movies = moviesTask.Result;
+
+            ApplySorting(ref newsArticles, ref movies, request.SortBy);
 
             return new AggregationResponse
             {
@@ -49,5 +51,22 @@ namespace AgileActorsApp.Services
                 Movies = movies,
             };
         }
+
+        private void ApplySorting(ref ArticlesResult newsArticles, ref MovieSearchResponse movies, SortByOption? sortBy)
+        {
+            if (sortBy == null) return;
+
+            switch (sortBy)
+            {
+                case SortByOption.Date:
+                    newsArticles.Articles = newsArticles.Articles?.OrderByDescending(a => a.PublishedAt).ToList();
+                    movies.Results = movies.Results?.OrderByDescending(m => m.ReleaseDate).ToList();
+                    break;
+                case SortByOption.Popularity:
+                    movies.Results = movies.Results?.OrderByDescending(m => m.Popularity).ToList();
+                    break;
+            }
+        }
+
     }
 }

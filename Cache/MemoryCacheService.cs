@@ -1,23 +1,37 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace AgileActorsApp.Cache
 {
     public class MemoryCacheService
     {
-        private readonly IMemoryCache _cache;
+        private readonly IDistributedCache _cache;
+        private readonly DistributedCacheEntryOptions _cacheOptions;
 
-        public MemoryCacheService(IMemoryCache cache)
+        public MemoryCacheService(IDistributedCache cache)
         {
             _cache = cache;
+            _cacheOptions = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
+            };
         }
 
-        public T GetOrSet<T>(string key, Func<T> getData, int expirationSeconds = 300)
+        public async Task<T?> GetOrSetAsync<T>(string cacheKey, Func<Task<T>> getDataFunc)
         {
-            if (!_cache.TryGetValue(key, out T data))
+            var cachedData = await _cache.GetStringAsync(cacheKey);
+            if (!string.IsNullOrEmpty(cachedData))
             {
-                data = getData();
-                _cache.Set(key, data, TimeSpan.FromSeconds(expirationSeconds));
+                return JsonSerializer.Deserialize<T>(cachedData);
             }
+
+            var data = await getDataFunc();
+            if (data != null)
+            {
+                var serializedData = JsonSerializer.Serialize(data);
+                await _cache.SetStringAsync(cacheKey, serializedData, _cacheOptions);
+            }
+
             return data;
         }
     }

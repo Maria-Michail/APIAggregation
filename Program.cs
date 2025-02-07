@@ -1,4 +1,5 @@
 using AgileActorsApp.ApiKey;
+using AgileActorsApp.Cache;
 using AgileActorsApp.Middleware;
 using AgileActorsApp.Services;
 using AgileActorsApp.Services.Movies;
@@ -10,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 var configuration = builder.Configuration;
 builder.Services.Configure<ApiKeys>(configuration.GetSection("ApiKeys"));
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddScoped<MemoryCacheService>();
 
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<INewsService, NewsService>();
