@@ -1,0 +1,17 @@
+2025-02-07T18:49:20.6665171+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Version: 1.4.1+4f4ed7d3ce76cfa6e671c7a55f8b9cb6f2cb35c5
+2025-02-07T18:49:20.6787647+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Logging mode: asynchronous
+2025-02-07T18:49:20.6796984+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Logging level: Information
+2025-02-07T18:49:20.6797013+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION CreateBuilderAsync entry time: 18:49:20.647
+2025-02-07T18:49:20.6807595+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION PID: 29504
+2025-02-07T18:49:20.6808408+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Runtime information: win-x64 - .NET 8.0.11
+2025-02-07T18:49:20.6808474+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Runtime location: C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.11\System.Private.CoreLib.dll
+2025-02-07T18:49:20.6808530+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION IsDynamicCodeSupported: True
+2025-02-07T18:49:20.6808545+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Test module: C:\Users\maria\Desktop\Agile Actors\AgileActorsUnitTests\bin\Debug\net8.0\AgileActorsUnitTests.dll
+2025-02-07T18:49:20.6809801+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION Command line arguments: '--server --diagnostic --diagnostic-verbosity Information --diagnostic-output-directory C:\Users\maria\Desktop\Agile Actors\AgileActorsUnitTests\bin\Debug\net8.0\Log --results-directory C:\Users\maria\Desktop\Agile Actors\AgileActorsApp\TestResults --client-port 51138'
+2025-02-07T18:49:20.6818549+00:00 Microsoft.Testing.Platform.Builder.TestApplication INFORMATION TESTINGPLATFORM_DEFAULT_HANG_TIMEOUT: ''
+2025-02-07T18:49:20.6968079+00:00 Microsoft.Testing.Platform.Hosts.TestHostBuilder INFORMATION Setting RegisterEnvironmentVariablesConfigurationSource: 'True'
+2025-02-07T18:49:20.6992598+00:00 Microsoft.Testing.Platform.Configurations.JsonConfigurationSource+JsonConfigurationProvider INFORMATION Config file 'C:\Users\maria\Desktop\Agile Actors\AgileActorsUnitTests\bin\Debug\net8.0\AgileActorsUnitTests.testconfig.json' not found.
+2025-02-07T18:49:20.7000782+00:00 Microsoft.Testing.Platform.Hosts.TestHostBuilder INFORMATION Setting PlatformExitProcessOnUnhandledException: 'False', config file: False environment variable:  VSTest mode: False
+2025-02-07T18:49:20.7840620+00:00 Microsoft.Testing.Platform.Requests.TestHostTestFrameworkInvoker INFORMATION Test framework UID: 'MSTestExtension' Version: '3.6.1' DisplayName: 'MSTest' Description: 'MSTest Framework for Microsoft Testing Platform'
+2025-02-07T18:49:20.7911435+00:00 Microsoft.Testing.Extensions.VSTestBridge.ObjectModel.MessageLoggerAdapter WARNING Runsettings attribute 'MaxCpuCount' is not supported by Microsoft.Testing.Platform and will be ignored
+2025-02-07T18:49:23.8536002+00:00 Microsoft.Testing.Extensions.Telemetry.AppInsightsProvider WARNING Telemetry task didn't flush after '3', some payload could be lost
